@@ -21,7 +21,10 @@ export async function getCurrentUser() {
   if (!session) return null;
   const { data, error } = await supabase.auth.getUser();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    return null;
+    //throw new Error(error.message);
+  }
   return data?.user;
 }
 export async function logout() {
