@@ -87,7 +87,7 @@ const ErrorMessage = styled.span`
 `;
 
 function LoginForm() {
-  const [email, setEmail] = useState("admin@wild-oasis.com");
+  const [email, setEmail] = useState("admin@serene-haven.com");
   const [password, setPassword] = useState("Umair@5297");
   //const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
