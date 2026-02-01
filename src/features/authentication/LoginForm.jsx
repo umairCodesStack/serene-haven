@@ -95,28 +95,19 @@ function LoginForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Reset error
     setError("");
 
-    // Basic validation
     if (!email || !password) {
       setError("Please fill in all fields");
       return;
     }
-    login({ email, password });
 
     if (!email.includes("@")) {
       setError("Please enter a valid email address");
       return;
     }
 
-    // Simulate login
-    //setIsLoading(isLoading);
-
-    // Add your login logic here
-    setTimeout(() => {
-      //setIsLoading(false);
-    }, 1000);
+    login({ email, password });
   }
 
   return (

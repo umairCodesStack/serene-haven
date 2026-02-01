@@ -129,7 +129,6 @@ function Bookings() {
             </Button>
           </Modal.Open>
         </FloatingButton>
-
         <Modal.Window name="booking-form">
           <BookingForm />
         </Modal.Window>

@@ -214,7 +214,7 @@ const ErrorMessage = styled.span`
   margin-top: 0.4rem;
 `;
 
-function BookingForm({ setShowForm }) {
+function BookingForm({ onCloseModal }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [guestId, setGuestId] = useState(null);
   const [isCreatingGuest, setIsCreatingGuest] = useState(false);
@@ -350,11 +350,26 @@ function BookingForm({ setShowForm }) {
     // Create booking using the hook
     createBooking(bookingData, {
       onSuccess: () => {
-        // Close form or reset on success
-        setShowForm(false);
+        // Close form AND reset on success
+        onCloseModal?.();
+        // Reset all form fields
+        setCurrentStep(1);
+        setGuestId(null);
+        setFullName("");
+        setEmail("");
+        setNationalID("");
+        setNationality("");
+        setCountryFlag("");
+        setStartDate("");
+        setEndDate("");
+        setNumGuests(1);
+        setCabinId("");
+        setHasBreakfast(false);
+        setIsPaid(false);
+        setObservations("");
+        setError("");
       },
     });
-    handleCancel();
   }
 
   function handleBack() {
@@ -363,26 +378,7 @@ function BookingForm({ setShowForm }) {
   }
 
   function handleCancel() {
-    if (setShowForm) {
-      setShowForm(false);
-    } else {
-      // Reset form
-      setCurrentStep(1);
-      setGuestId(null);
-      setFullName("");
-      setEmail("");
-      setNationalID("");
-      setNationality("");
-      setCountryFlag("");
-      setStartDate("");
-      setEndDate("");
-      setNumGuests(1);
-      setCabinId("");
-      setHasBreakfast(false);
-      setIsPaid(false);
-      setObservations("");
-      setError("");
-    }
+    onCloseModal?.();
   }
 
   const isLoading = isCreatingGuest || isCreatingBooking || isLoadingCabins;

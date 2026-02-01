@@ -18,6 +18,7 @@ import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import { useCheckout } from "../check-in-out/useCheckout";
 import { useDeleteBooking } from "./useDeleteBooking";
+import { useCheckin } from "../check-in-out/useCheckin";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -63,20 +64,20 @@ function BookingRow({
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
   const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { checkin, isCheckingIn } = useCheckin();
 
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
     "checked-out": "silver",
   };
-
   return (
     <Table.Row>
       <Cabin>{cabinName}</Cabin>
 
       <Stacked>
-        <span>{guestName && " "}</span>
-        <span>{email && " "}</span>
+        <span>{guestName}</span>
+        <span>{email}</span>
       </Stacked>
 
       <Stacked>
@@ -110,7 +111,8 @@ function BookingRow({
             {status === "unconfirmed" && (
               <Menus.Button
                 icon={<HiArrowDownOnSquare />}
-                onClick={() => navigate(`/checkin/${bookingId}`)}
+                onClick={() => checkin({ bookingId, breakfast: {} })} // ✅ Pass an object
+                disabled={isCheckingIn}
               >
                 Check in
               </Menus.Button>

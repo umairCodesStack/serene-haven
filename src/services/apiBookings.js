@@ -105,6 +105,9 @@ export async function getStaysTodayActivity() {
 }
 
 export async function updateBooking(id, obj) {
+  console.log("Updating booking with ID:", id, typeof id); // Debug log
+  console.log("Update object:", obj); // Debug log
+
   const { data, error } = await supabase
     .from("bookings")
     .update(obj)
